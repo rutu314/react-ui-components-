@@ -1,76 +1,69 @@
-# react-ui-components-
-This project contains two reusable React components built using React, TypeScript, TailwindCSS, and Storybook:
+# React + TypeScript + Vite
 
-InputField – A flexible input component with label, placeholder, helper text, error messages, multiple variants, sizes, and optional features like clear button and password toggle.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-DataTable – A table component with sortable columns, row selection, loading and empty states.
+Currently, two official plugins are available:
 
-Tech Stack
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-React
+## Expanding the ESLint configuration
 
-TypeScript
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-TailwindCSS
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Storybook
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-Features
-InputField
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-Variants: filled, outlined, ghost
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Sizes: sm, md, lg
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-States: disabled, invalid, loading
-
-Optional clear button and password toggle
-
-Light & dark theme support
-
-Accessible with proper ARIA attributes
-
-DataTable
-
-Displays tabular data
-
-Column sorting
-
-Row selection (single/multiple)
-
-Loading and empty states
-
-Fully typed with TypeScript
-
-Setup
-Clone repo
-git clone <your-github-link>
-cd react-ui-components
-
-Install dependencies
-npm install
-
-Run project
-npm run dev
-
-Run Storybook
-npm run storybook
-
-
-Storybook link: https://storybook-static-i1t0aahtc-hrutujas-projects-a8a9ca1f.vercel.app
-
-Approach
-
-Components built modularly for reusability
-
-Styled using TailwindCSS for responsive and clean design
-
-Props typed with TypeScript
-
-All states documented in Storybook
-
-Submission
-
-GitHub Repository: https://github.com/rutu314/react-ui-components-
-
-Storybook Preview:https://storybook-static-i1t0aahtc-hrutujas-projects-a8a9ca1f.vercel.app
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
